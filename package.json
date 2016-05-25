@@ -1,0 +1,24 @@
+{
+  "name": "loopback-model-extender",
+  "version": "1.0.0",
+  "description": "A json centered loopback model extender",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hooptaplabs/loopback-model-extender.git"
+  },
+  "author": "Roger Fos Soler (desaroger23@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hooptaplabs/loopback-model-extender/issues"
+  },
+  "homepage": "https://github.com/Hooptaplabs/loopback-model-extender#readme",
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "eslint": "^2.10.2"
+  }
+}
