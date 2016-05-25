@@ -2,9 +2,12 @@
   "name": "loopback-model-extender",
   "version": "1.0.0",
   "description": "A json centered loopback model extender",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir dist",
+    "eslint": "eslint ./src; exit 0",
+    "test": "jasmine-node ./spec/ --color",
+    "test-watch": "jasmine-node --autotest ./spec/ --color"
   },
   "repository": {
     "type": "git",
@@ -19,6 +22,7 @@
   "devDependencies": {
     "babel-cli": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
-    "eslint": "^2.10.2"
+    "eslint": "^2.10.2",
+    "eslint-config-loopback": "^3.0.1"
   }
 }
