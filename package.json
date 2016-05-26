@@ -6,8 +6,8 @@
   "scripts": {
     "build": "babel src --out-dir tmp-babel && node ./scripts/uglify && rimraf tmp-babel",
     "eslint": "eslint ./src; exit 0",
-    "test": "jasmine-node ./spec/ --color",
-    "test-watch": "jasmine-node --autotest ./spec/ --color"
+    "test": "./node_modules/.bin/jasmine-node ./spec/ --color",
+    "test-watch": "./node_modules/.bin/jasmine-node --autotest ./spec/ --color"
   },
   "repository": {
     "type": "git",
