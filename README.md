@@ -1,2 +1,2 @@
 -----
-[![Travis-CI](https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg)](https://travis-ci.org/Hooptaplabs/loopback-model-extender)[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/Hooptaplabs/loopback-model-extender?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Travis-CI](https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg)](https://travis-ci.org/Hooptaplabs/loopback-model-extender)
