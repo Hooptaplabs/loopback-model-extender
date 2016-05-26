@@ -1,4 +1,6 @@
 
+var service = require('../src/index');
+
 describe('math service', function () {
 
   describe('adder', function () {
