@@ -7,7 +7,7 @@ install:
 after_success:
   - npm run coverage
   - bash <(curl -s https://codecov.io/bash)
-  - ./node_modules/codeclimate-test-reporter/bin/codeclimate < coverage/lcov.info
+  - ./node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info
 addons:
     code_climate:
         repo_token: ecf49f23edb584a4ac1d4d7c39687348de89b73de87abc873de6963085f82852
