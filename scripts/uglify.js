@@ -4,7 +4,7 @@
 
 var NodeUglifier = require('node-uglifier');
 var nodeUglifier = new NodeUglifier('./tmp-babel/index.js');
-nodeUglifier.merge().uglify();
+nodeUglifier.merge()/*.uglify()*/;
 
 //exporting
 nodeUglifier.exportToFile('./dist/index.js');

@@ -1,9 +1,9 @@
 Loopback Model Extender
 =========
-[![GitHub version](https://badge.fury.io/gh/Hooptaplabs%2Floopback-model-extender.svg)](https://badge.fury.io/gh/Hooptaplabs%2Floopback-model-extender)
-[![Travis-CI](https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg)](https://travis-ci.org/Hooptaplabs/loopback-model-extender)
-[![codecov](https://codecov.io/gh/Hooptaplabs/loopback-model-extender/branch/develop/graph/badge.svg)](https://codecov.io/gh/Hooptaplabs/loopback-model-extender)
-[![Dependency Status](https://gemnasium.com/badges/github.com/Hooptaplabs/loopback-model-extender.svg)](https://gemnasium.com/github.com/Hooptaplabs/loopback-model-extender)
+[![GitHub version][fury-badge]][fury-url]
+[![Travis-CI][travis-badge]][travis-url]
+[![codecov][codecov-badge]][codecov-url]
+[![Dependency Status][gemnasium-badge]][gemnasium-url]
 [![David-DM](https://david-dm.org/Hooptaplabs/loopback-model-extender.svg)](https://github.com/Hooptaplabs/loopback-model-extender)
 
 Loopback-model-extender is a json-centered extends library for Loopback Api Rest. It allow you specify
@@ -70,3 +70,24 @@ Once installed you need folow this steps:
 
         "extends": ["helloworld"]
 6. **Tada!** All the models whose json has the *extends* key will have the method *helloworld*.
+
+[npm-badge]: https://img.shields.io/npm/v/loopback-model-extender.svg
+[npm-url]: https://www.npmjs.com/package/loopback-model-extender
+
+[fury-badge]: https://badge.fury.io/gh/Hooptaplabs%2Floopback-model-extender.svg
+[fury-url]: https://www.npmjs.com/package/loopback-model-extender
+
+[travis-badge]: https://api.travis-ci.org/codeclimate/loopback-model-extender.svg
+[travis-url]: https://travis-ci.org/codeclimate/loopback-model-extender
+
+[codecov-badge]: https://codecov.io/gh/Hooptaplabs/loopback-model-extender/branch/develop/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/Hooptaplabs/loopback-model-extender
+
+[gemnasium-badge]: https://gemnasium.com/badges/github.com/Hooptaplabs/loopback-model-extender.svg
+[gemnasium-url]: https://gemnasium.com/github.com/Hooptaplabs/loopback-model-extender
+
+[codeclimate-badge]: https://codeclimate.com/github/codeclimate/loopback-model-extender/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/codeclimate/loopback-model-extender
+
+[coverage-badge]: https://codeclimate.com/github/codeclimate/loopback-model-extender/badges/coverage.svg
+[coverage-url]: https://codeclimate.com/github/codeclimate/loopback-model-extender/coverage

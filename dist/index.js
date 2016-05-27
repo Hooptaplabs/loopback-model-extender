@@ -1,2 +1,228 @@
-var cachedModules=[];cachedModules[7692]={exports:{}},function(e,r){"use strict";e.exports=function(e){return{throwError:function(e){throw new Error(this.namespace(e))},log:function(e){console.log(this.namespace(e))},namespace:function(r){return e+": "+r}}}}.call(this,cachedModules[7692],cachedModules[7692].exports),cachedModules[2756]={exports:{}},function(e,r){"use strict";e.exports={isArray:function(e){return e instanceof Array},addTrailingSlash:function(e){return"/"==e.substr(-1)?e:e+"/"}}}.call(this,cachedModules[2756],cachedModules[2756].exports),cachedModules[2206]={exports:{}},function(e,r){"use strict";var o="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol?"symbol":typeof e};e.exports=function(e,r,t){var n={requireExtension:function(r){var o=!1,n=e.folder+r;try{require.resolve(n),o=!0}catch(i){}return o?require(n):require(t+r)},anyInputType2ObjectType:function(e){if(r.isArray(e))return e.map(n.anyInputType2ObjectType);var t={from:null,"function":null,options:{},isDelete:!1};if("string"==typeof e){var i="!"===e.charAt(0),u=i?e.substring(1):e;t.from=u,t["function"]=n.requireExtension(u),t["function"]=n.requireExtension(u),t.options={},t.isDelete=i}else"function"==typeof e?(t.from=!1,t["function"]=e,t.options={},t.isDelete=!1):"object"===("undefined"==typeof e?"undefined":o(e))&&(t.from=e.from,t["function"]=n.requireExtension(e.from),t.options=e.options||{},t.isDelete=!1);return t},removeExcludedItems:function(e){var r=n.getExcludeList(e);return n.removeExcluded(e,r)},getExcludeList:function(e){return r.isArray(e)?e.filter(n.getExcludeList).map(function(e){return e.from}):!!(e&&e.from&&e.isDelete)},removeExcluded:function(e,o){return r.isArray(e)?e.filter(function(e){return n.removeExcluded(e,o)}):e&&e.from?e.isDelete?!1:!~o.indexOf(e.from):!1},runFunctions:function(e,o){return r.isArray(o)?void o.forEach(function(r){return n.runFunctions(e,r)}):void(null!==o.from&&(o.isDelete||o["function"](e,o.options)))}};return n}}.call(this,cachedModules[2206],cachedModules[2206].exports);var MODULE_NAME="loopback-model-extender",DEFAULT_FOLDER="./extensions/",inform=cachedModules[7692].exports,utils=cachedModules[2756].exports,core=cachedModules[2206].exports;module.exports=function(){function e(e){for(var o in e.models){if(!e.models.hasOwnProperty(o))return;var t=e.models[o],n=t.settings["extends"]||[];r(t,n)}}function r(e,r){o(e,r),r=core.anyInputType2ObjectType(r),r=core.removeExcludedItems(r),core.runFunctions(e,r)}function o(e,r){e||inform.throwError("Must include the model as first argument."),r||inform.throwError("Must include the list as second argument."),utils.isArray(r)||inform.throwError("Second argument list must be an Array.")}var t=arguments.length<=0||void 0===arguments[0]?{}:arguments[0],n=t.app||!1;return inform=inform(MODULE_NAME),core=core(t,utils,DEFAULT_FOLDER),t.folder=utils.addTrailingSlash(t.folder),n&&n.models&&e(n),r};
-//# sourceMappingURL=UGLIFY_SOURCE_MAP_TOKEN
+var cachedModules=[];
+cachedModules[1220]={exports:{}};
+(function(module,exports) {'use strict';
+
+/**
+ * Created by roger on 26/05/16.
+ */
+
+module.exports = function (_namespace) {
+	return {
+		throwError: function throwError(msg) {
+			throw new Error(this.namespace(msg));
+		},
+		log: function log(msg) {
+			console.log(this.namespace(msg));
+		},
+		namespace: function namespace(msg) {
+			return _namespace + ': ' + msg;
+		}
+	};
+};}).call(this,cachedModules[1220],cachedModules[1220].exports);
+cachedModules[4038]={exports:{}};
+(function(module,exports) {'use strict';
+
+/**
+ * Created by roger on 26/05/16.
+ */
+
+module.exports = {
+	isArray: function isArray(obj) {
+		return obj instanceof Array;
+	},
+	addTrailingSlash: function addTrailingSlash(text) {
+		return text.substr(-1) == '/' ? text : text + '/';
+	}
+};}).call(this,cachedModules[4038],cachedModules[4038].exports);
+cachedModules[5893]={exports:{}};
+(function(module,exports) {'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+/**
+ * Created by roger on 26/05/16.
+ */
+
+module.exports = function (options, utils, defaultExtensionFolder) {
+
+	var me = {
+		requireExtension: function requireExtension(extensionName) {
+
+			var exists = false;
+			var dependency = options.folder + extensionName;
+			try {
+				require.resolve(dependency);
+				exists = true;
+			} catch (e) {}
+
+			if (exists) {
+				return require(dependency);
+			}
+
+			return require(defaultExtensionFolder + extensionName);
+		},
+		anyInputType2ObjectType: function anyInputType2ObjectType(input) {
+
+			if (utils.isArray(input)) {
+				return input.map(me.anyInputType2ObjectType);
+			}
+
+			var result = {
+				from: null,
+				function: null,
+				options: {},
+				isDelete: false
+			};
+
+			if (typeof input === 'string') {
+				var isDelete = input.charAt(0) === '!';
+				var from = isDelete ? input.substring(1) : input;
+
+				result.from = from;
+				result.function = me.requireExtension(from);
+				result.function = me.requireExtension(from);
+				result.options = {};
+				result.isDelete = isDelete;
+			} else if (typeof input === 'function') {
+				result.from = false;
+				result.function = input;
+				result.options = {};
+				result.isDelete = false;
+			} else if ((typeof input === 'undefined' ? 'undefined' : _typeof(input)) === 'object') {
+				result.from = input.from;
+				result.function = me.requireExtension(input.from);
+				result.options = input.options || {};
+				result.isDelete = false;
+			}
+
+			return result;
+		},
+		removeExcludedItems: function removeExcludedItems(list) {
+			var excluded = me.getExcludeList(list);
+			return me.removeExcluded(list, excluded);
+		},
+		getExcludeList: function getExcludeList(input) {
+
+			if (utils.isArray(input)) {
+				return input.filter(me.getExcludeList).map(function (item) {
+					return item.from;
+				});
+			}
+
+			if (input && input.from && input.isDelete) {
+				return true;
+			}
+
+			return false;
+		},
+		removeExcluded: function removeExcluded(list, excluded) {
+
+			if (utils.isArray(list)) {
+				return list.filter(function (item) {
+					return me.removeExcluded(item, excluded);
+				});
+			}
+
+			if (!list || !list.from) {
+				return false;
+			}
+			if (list.isDelete) {
+				return false;
+			}
+			if (~excluded.indexOf(list.from)) {
+				return false;
+			}
+
+			return true;
+		},
+		runFunctions: function runFunctions(model, obj) {
+
+			if (utils.isArray(obj)) {
+				obj.forEach(function (item) {
+					return me.runFunctions(model, item);
+				});
+				return;
+			}
+
+			if (obj.from === null) {
+				return;
+			} else if (obj.isDelete) {
+				return;
+			}
+
+			obj.function(model, obj.options);
+		}
+	};
+	return me;
+};}).call(this,cachedModules[5893],cachedModules[5893].exports);'use strict';
+
+/**
+ * Created by roger on 25/05/16.
+ */
+
+var MODULE_NAME = 'loopback-model-extender';
+var DEFAULT_FOLDER = './extensions/';
+
+var inform = cachedModules[1220].exports;
+var utils = cachedModules[4038].exports;
+var core = cachedModules[5893].exports;
+
+module.exports = function () {
+	var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+
+
+	// Prepare
+	var app = options.app || false;
+	inform = inform(MODULE_NAME);
+	core = core(options, utils, DEFAULT_FOLDER);
+	options.folder = utils.addTrailingSlash(options.folder);
+
+	// Extend models of the app if available
+	if (app && app.models) {
+		extendAppModels(app);
+	}
+
+	// Return function if you want launch extender manually
+	return extend;
+
+	/*	Functions
+  ---------------------------------------------------------------------------------*/
+
+	function extendAppModels(app) {
+		for (var k in app.models) {
+			if (!app.models.hasOwnProperty(k)) return;
+
+			var model = app.models[k];
+			var extensions = model.settings.extends || [];
+
+			extend(model, extensions);
+		}
+	}
+
+	function extend(model, list) {
+
+		// Checks if inputs are valid
+		checkInputs(model, list);
+
+		// Transform any form of input to object
+		list = core.anyInputType2ObjectType(list);
+
+		// Remove the excluded list
+		list = core.removeExcludedItems(list);
+
+		// Load one by one all extensions
+		core.runFunctions(model, list);
+	}
+
+	function checkInputs(model, list) {
+		if (!model) {
+			inform.throwError('Must include the model as first argument.');
+		}
+		if (!list) {
+			inform.throwError('Must include the list as second argument.');
+		}
+		if (!utils.isArray(list)) {
+			inform.throwError('Second argument list must be an Array.');
+		}
+	}
+};

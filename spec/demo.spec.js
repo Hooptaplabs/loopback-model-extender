@@ -1,5 +1,5 @@
 
-var service = require('../src/index');
+var service = require('../dist/index');
 
 describe('math service', function () {
 
