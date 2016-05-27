@@ -18,10 +18,12 @@ This library internally makes this few steps:
 1. Iterate over the models you declared on loopback (app.models)
 2. For every model find on the <model>.json the root key *extends*
 3. The *extends* key is expected to be something like:
-    "extends" : ["buyable", "segmentable"]
+
+        "extends" : ["buyable", "segmentable"]
 4. Every key on *extends* array must represent a file inside a folder, say "server/boot/extensions" (it's an example),
 so you will have two files inside this folder: 'buyable.js' and 'segmentable.js'.
 5. The file 'buyable.js' must be something like:
+
     ```javascript
         module.exports = function (Model) {
             Model.buy = function () {};
@@ -47,6 +49,7 @@ Usage
 Once installed you need folow this steps:
 
 1. First you need load the package on your Loopback App. Create a boot script on *server/boot* with:
+
     ```javascript
     var Extend = require('loopback-model-extender');
     module.exports = function (app) {
@@ -55,6 +58,7 @@ Once installed you need folow this steps:
     ```
 2. Create a extensions folder. In our example we will put it on *server/boot/extensions*
 3. Create a file inside called "helloworld.js" with:
+
     ```javascript
     module.exports = function (Model) {
             Model.helloworld = function (name) {
@@ -64,5 +68,6 @@ Once installed you need folow this steps:
     ```
 4. Found the json of one of your models. Say you have model **Food** (for example), you will found the .json file on *common/models/Food.json*.
 5. Add the key **extends** on the json with:
-    "extends": ["helloworld"]
+
+        "extends": ["helloworld"]
 6. **Tada!** All the models whose json has the *extends* key will have the method *helloworld*.
