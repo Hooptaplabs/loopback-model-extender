@@ -4,7 +4,6 @@ Loopback Model Extender
 [![Travis-CI](https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg)](https://travis-ci.org/Hooptaplabs/loopback-model-extender)
 [![codecov](https://codecov.io/gh/Hooptaplabs/loopback-model-extender/branch/develop/graph/badge.svg)](https://codecov.io/gh/Hooptaplabs/loopback-model-extender)
 [![Dependency Status](https://gemnasium.com/badges/github.com/Hooptaplabs/loopback-model-extender.svg)](https://gemnasium.com/github.com/Hooptaplabs/loopback-model-extender)
-[![David-DM](https://david-dm.org/Hooptaplabs/loopback-model-extender.svg)](https://github.com/Hooptaplabs/loopback-model-extender)
 
 Loopback-model-extender is a json-centered extends library for Loopback Api Rest. It allow you specify
 a list of functions that will extend your models.
