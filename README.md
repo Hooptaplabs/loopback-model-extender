@@ -2,6 +2,8 @@ Loopback Model Extender
 =========
 [![GitHub version][fury-badge]][fury-url]
 [![Travis-CI][travis-badge]][travis-url]
+[![Codeclimate][codeclimate-badge]][codeclimate-url]
+[![Codeclimate Coverage][codeclimate-cov-badge]][codeclimate-cov-url]
 [![codecov][codecov-badge]][codecov-url]
 [![Dependency Status][gemnasium-badge]][gemnasium-url]
 
@@ -87,6 +89,9 @@ Once installed you need folow this steps:
 
 [codeclimate-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/gpa.svg
 [codeclimate-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender
+
+[codeclimate-cov-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/coverage.svg
+[codeclimate-cov-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/coverage
 
 [coverage-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/coverage.svg
 [coverage-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/coverage
