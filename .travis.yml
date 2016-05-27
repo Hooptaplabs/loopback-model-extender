@@ -6,7 +6,6 @@ install:
   - npm run build
 after_success:
   - npm run coverage
-  - bash <(curl -s https://codecov.io/bash)
   - ./node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info
 addons:
     code_climate:

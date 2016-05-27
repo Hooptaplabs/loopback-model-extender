@@ -4,7 +4,6 @@ Loopback Model Extender
 [![Travis-CI][travis-badge]][travis-url]
 [![Codeclimate][codeclimate-badge]][codeclimate-url]
 [![Codeclimate Coverage][codeclimate-cov-badge]][codeclimate-cov-url]
-[![codecov][codecov-badge]][codecov-url]
 [![Dependency Status][gemnasium-badge]][gemnasium-url]
 
 Loopback-model-extender is a json-centered extends library for Loopback Api Rest. It allow you specify
@@ -80,9 +79,6 @@ Once installed you need folow this steps:
 
 [travis-badge]: https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg
 [travis-url]: https://travis-ci.org/Hooptaplabs/loopback-model-extender
-
-[codecov-badge]: https://codecov.io/gh/Hooptaplabs/loopback-model-extender/branch/develop/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/Hooptaplabs/loopback-model-extender
 
 [gemnasium-badge]: https://gemnasium.com/badges/github.com/Hooptaplabs/loopback-model-extender.svg
 [gemnasium-url]: https://gemnasium.com/github.com/Hooptaplabs/loopback-model-extender
