@@ -8,7 +8,7 @@
     "eslint": "eslint ./src; exit 0",
     "test": "jasmine-node ./spec/ --color",
     "test-watch": "jasmine-node --autotest ./spec/ --color",
-    "coverage": "istanbul cover jasmine-node --captureExceptions ./spec/ --color"
+    "coverage": "istanbul cover -x '**/spec/**' jasmine-node --captureExceptions ./spec/ --color"
   },
   "repository": {
     "type": "git",

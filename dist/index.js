@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[3936]={exports:{}};
+cachedModules[8268]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -18,8 +18,8 @@ module.exports = function (_namespace) {
 			return _namespace + ': ' + msg;
 		}
 	};
-};}).call(this,cachedModules[3936],cachedModules[3936].exports);
-cachedModules[1648]={exports:{}};
+};}).call(this,cachedModules[8268],cachedModules[8268].exports);
+cachedModules[3609]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -33,8 +33,8 @@ module.exports = {
 	addTrailingSlash: function addTrailingSlash(text) {
 		return text.substr(-1) == '/' ? text : text + '/';
 	}
-};}).call(this,cachedModules[1648],cachedModules[1648].exports);
-cachedModules[6690]={exports:{}};
+};}).call(this,cachedModules[3609],cachedModules[3609].exports);
+cachedModules[3368]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -154,7 +154,7 @@ module.exports = function (options, utils, defaultExtensionFolder) {
 		}
 	};
 	return me;
-};}).call(this,cachedModules[6690],cachedModules[6690].exports);'use strict';
+};}).call(this,cachedModules[3368],cachedModules[3368].exports);'use strict';
 
 /**
  * Created by roger on 25/05/16.
@@ -163,9 +163,9 @@ module.exports = function (options, utils, defaultExtensionFolder) {
 var MODULE_NAME = 'loopback-model-extender';
 var DEFAULT_FOLDER = './extensions/';
 
-var inform = cachedModules[3936].exports;
-var utils = cachedModules[1648].exports;
-var core = cachedModules[6690].exports;
+var inform = cachedModules[8268].exports;
+var utils = cachedModules[3609].exports;
+var core = cachedModules[3368].exports;
 
 module.exports = function () {
 	var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
