@@ -76,8 +76,8 @@ Once installed you need folow this steps:
 [fury-badge]: https://badge.fury.io/gh/Hooptaplabs%2Floopback-model-extender.svg
 [fury-url]: https://www.npmjs.com/package/loopback-model-extender
 
-[travis-badge]: https://api.travis-ci.org/codeclimate/loopback-model-extender.svg
-[travis-url]: https://travis-ci.org/codeclimate/loopback-model-extender
+[travis-badge]: https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg
+[travis-url]: https://travis-ci.org/Hooptaplabs/loopback-model-extender
 
 [codecov-badge]: https://codecov.io/gh/Hooptaplabs/loopback-model-extender/branch/develop/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/Hooptaplabs/loopback-model-extender
@@ -85,8 +85,8 @@ Once installed you need folow this steps:
 [gemnasium-badge]: https://gemnasium.com/badges/github.com/Hooptaplabs/loopback-model-extender.svg
 [gemnasium-url]: https://gemnasium.com/github.com/Hooptaplabs/loopback-model-extender
 
-[codeclimate-badge]: https://codeclimate.com/github/codeclimate/loopback-model-extender/badges/gpa.svg
-[codeclimate-url]: https://codeclimate.com/github/codeclimate/loopback-model-extender
+[codeclimate-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/gpa.svg
+[codeclimate-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender
 
-[coverage-badge]: https://codeclimate.com/github/codeclimate/loopback-model-extender/badges/coverage.svg
-[coverage-url]: https://codeclimate.com/github/codeclimate/loopback-model-extender/coverage
+[coverage-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/coverage.svg
+[coverage-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/coverage
