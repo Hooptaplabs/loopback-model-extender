@@ -19,7 +19,7 @@ This library internally makes this few steps:
 2. For every model find on the <model>.json the root key *extends*
 3. The *extends* key is expected to be something like:
 
-    "extends" : ["buyable", "segmentable"]
+        "extends" : ["buyable", "segmentable"]
 4. Every key on *extends* array must represent a file inside a folder, say "server/boot/extensions" (it's an example),
 so you will have two files inside this folder: 'buyable.js' and 'segmentable.js'.
 5. The file 'buyable.js' must be something like:
@@ -69,5 +69,5 @@ Once installed you need folow this steps:
 4. Found the json of one of your models. Say you have model **Food** (for example), you will found the .json file on *common/models/Food.json*.
 5. Add the key **extends** on the json with:
 
-    "extends": ["helloworld"]
+        "extends": ["helloworld"]
 6. **Tada!** All the models whose json has the *extends* key will have the method *helloworld*.
