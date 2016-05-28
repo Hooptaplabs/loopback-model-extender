@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[8750]={exports:{}};
+cachedModules[9336]={exports:{}};
 (function(module,exports) {"use strict";
 
 /**
@@ -10,8 +10,8 @@ module.exports = {
 	throwError: function throwError(msg) {
 		throw new Error(msg);
 	}
-};}).call(this,cachedModules[8750],cachedModules[8750].exports);
-cachedModules[4210]={exports:{}};
+};}).call(this,cachedModules[9336],cachedModules[9336].exports);
+cachedModules[3762]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -27,8 +27,8 @@ module.exports = {
 
 		return text.substr(-1) == '/' ? text : text + '/';
 	}
-};}).call(this,cachedModules[4210],cachedModules[4210].exports);
-cachedModules[495]={exports:{}};
+};}).call(this,cachedModules[3762],cachedModules[3762].exports);
+cachedModules[2712]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -38,8 +38,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  */
 
 var path = require('path');
-var inform = cachedModules[8750].exports;
-var utils = cachedModules[4210].exports;
+var inform = cachedModules[9336].exports;
+var utils = cachedModules[3762].exports;
 
 module.exports = function (options) {
 
@@ -158,15 +158,15 @@ module.exports = function (options) {
 		}
 	};
 	return me;
-};}).call(this,cachedModules[495],cachedModules[495].exports);'use strict';
+};}).call(this,cachedModules[2712],cachedModules[2712].exports);'use strict';
 
 /**
  * Created by roger on 25/05/16.
  */
 
-var inform = cachedModules[8750].exports;
-var utils = cachedModules[4210].exports;
-var Core = cachedModules[495].exports;
+var inform = cachedModules[9336].exports;
+var utils = cachedModules[3762].exports;
+var Core = cachedModules[2712].exports;
 
 module.exports = function () {
 	var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
