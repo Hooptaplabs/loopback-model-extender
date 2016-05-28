@@ -86,7 +86,7 @@ Once installed you need folow this steps:
 [codeclimate-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/gpa.svg
 [codeclimate-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender
 
-[codeclimate-cov-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/coverage.svg
+[codeclimate-cov-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/coverage.svg?hash=1
 [codeclimate-cov-url]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/coverage
 
 [coverage-badge]: https://codeclimate.com/github/Hooptaplabs/loopback-model-extender/badges/coverage.svg
