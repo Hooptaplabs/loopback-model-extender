@@ -4,7 +4,8 @@ Loopback Model Extender
 [![Travis-CI][travis-badge]][travis-url]
 [![Codeclimate][codeclimate-badge]][codeclimate-url]
 [![Codeclimate Coverage][codeclimate-cov-badge]][codeclimate-cov-url]
-[![Dependency Status][gemnasium-badge]][gemnasium-url]
+[![Dependency][david-badge]][david-url]
+[![DevDependency][david-dev-badge]][david-dev-url]
 
 Loopback-model-extender is a json-centered extends library for Loopback Api Rest. It allow you specify
 a list of functions that will extend your models.
@@ -79,6 +80,11 @@ Once installed you need folow this steps:
 
 [travis-badge]: https://travis-ci.org/Hooptaplabs/loopback-model-extender.svg
 [travis-url]: https://travis-ci.org/Hooptaplabs/loopback-model-extender
+
+[david-badge]: https://david-dm.org/Hooptaplabs/loopback-model-extender.svg
+[david-url]: https://david-dm.org/Hooptaplabs/loopback-model-extender
+[david-dev-badge]: https://david-dm.org/Hooptaplabs/loopback-model-extender/dev-status.svg
+[david-dev-url]: https://david-dm.org/Hooptaplabs/loopback-model-extender#info=devDependencies
 
 [gemnasium-badge]: https://gemnasium.com/badges/github.com/Hooptaplabs/loopback-model-extender.svg
 [gemnasium-url]: https://gemnasium.com/github.com/Hooptaplabs/loopback-model-extender
