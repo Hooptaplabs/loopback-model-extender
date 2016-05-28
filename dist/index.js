@@ -1,25 +1,17 @@
 var cachedModules=[];
-cachedModules[8268]={exports:{}};
-(function(module,exports) {'use strict';
+cachedModules[8750]={exports:{}};
+(function(module,exports) {"use strict";
 
 /**
  * Created by roger on 26/05/16.
  */
 
-module.exports = function (_namespace) {
-	return {
-		throwError: function throwError(msg) {
-			throw new Error(this.namespace(msg));
-		},
-		log: function log(msg) {
-			console.log(this.namespace(msg));
-		},
-		namespace: function namespace(msg) {
-			return _namespace + ': ' + msg;
-		}
-	};
-};}).call(this,cachedModules[8268],cachedModules[8268].exports);
-cachedModules[3609]={exports:{}};
+module.exports = {
+	throwError: function throwError(msg) {
+		throw new Error(msg);
+	}
+};}).call(this,cachedModules[8750],cachedModules[8750].exports);
+cachedModules[4210]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -30,11 +22,13 @@ module.exports = {
 	isArray: function isArray(obj) {
 		return obj instanceof Array;
 	},
-	addTrailingSlash: function addTrailingSlash(text) {
+	addTrailingSlash: function addTrailingSlash() {
+		var text = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+
 		return text.substr(-1) == '/' ? text : text + '/';
 	}
-};}).call(this,cachedModules[3609],cachedModules[3609].exports);
-cachedModules[3368]={exports:{}};
+};}).call(this,cachedModules[4210],cachedModules[4210].exports);
+cachedModules[495]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -43,23 +37,31 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * Created by roger on 26/05/16.
  */
 
-module.exports = function (options, utils, defaultExtensionFolder) {
+var path = require('path');
+var inform = cachedModules[8750].exports;
+var utils = cachedModules[4210].exports;
+
+module.exports = function (options) {
+
+	var helloworldExtension = function helloworldExtension(model, options) {
+		model.helloworldWorks = options;
+	};
 
 	var me = {
 		requireExtension: function requireExtension(extensionName) {
-
-			var exists = false;
-			var dependency = options.folder + extensionName;
-			try {
-				require.resolve(dependency);
-				exists = true;
-			} catch (e) {}
-
-			if (exists) {
-				return require(dependency);
+			var func = null;
+			if (options.folder) {
+				var dependencyPath = path.resolve(options.folder, extensionName);
+				try {
+					require.resolve(dependencyPath);
+					func = require(dependencyPath);
+				} catch (e) {}
+			}
+			if (!func && extensionName == 'helloworld') {
+				func = helloworldExtension;
 			}
 
-			return require(defaultExtensionFolder + extensionName);
+			return func;
 		},
 		anyInputType2ObjectType: function anyInputType2ObjectType(input) {
 
@@ -148,24 +150,23 @@ module.exports = function (options, utils, defaultExtensionFolder) {
 				return;
 			} else if (obj.isDelete) {
 				return;
+			} else if (!obj.function || typeof obj.function != 'function') {
+				inform.throwError('Extension "' + obj.from + '" isn\'t a function.');
 			}
 
 			obj.function(model, obj.options);
 		}
 	};
 	return me;
-};}).call(this,cachedModules[3368],cachedModules[3368].exports);'use strict';
+};}).call(this,cachedModules[495],cachedModules[495].exports);'use strict';
 
 /**
  * Created by roger on 25/05/16.
  */
 
-var MODULE_NAME = 'loopback-model-extender';
-var DEFAULT_FOLDER = './extensions/';
-
-var inform = cachedModules[8268].exports;
-var utils = cachedModules[3609].exports;
-var core = cachedModules[3368].exports;
+var inform = cachedModules[8750].exports;
+var utils = cachedModules[4210].exports;
+var Core = cachedModules[495].exports;
 
 module.exports = function () {
 	var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
@@ -173,8 +174,7 @@ module.exports = function () {
 
 	// Prepare
 	var app = options.app || false;
-	inform = inform(MODULE_NAME);
-	core = core(options, utils, DEFAULT_FOLDER);
+	var core = Core(options);
 	options.folder = utils.addTrailingSlash(options.folder);
 
 	// Extend models of the app if available
@@ -193,7 +193,7 @@ module.exports = function () {
 			if (!app.models.hasOwnProperty(k)) return;
 
 			var model = app.models[k];
-			var extensions = model.settings.extends || [];
+			var extensions = !!model && !!model.settings && model.settings.extends || [];
 
 			extend(model, extensions);
 		}

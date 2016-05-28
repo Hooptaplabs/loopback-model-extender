@@ -2,19 +2,15 @@
  * Created by roger on 25/05/16.
  */
 
-const MODULE_NAME	 	= 'loopback-model-extender';
-const DEFAULT_FOLDER	= './extensions/';
-
 var inform		= require('./services/inform');
 var utils		= require('./services/utils');
-var core		= require('./services/core');
+var Core		= require('./services/core');
 
 module.exports = function(options = {}) {
 
 	// Prepare
 	var app			= options.app || false;
-	inform			= inform(MODULE_NAME);
-	core			= core(options, utils, DEFAULT_FOLDER);
+	var core		= Core(options);
 	options.folder	= utils.addTrailingSlash(options.folder);
 
 	// Extend models of the app if available
@@ -34,7 +30,7 @@ module.exports = function(options = {}) {
 			if (!app.models.hasOwnProperty(k)) return;
 
 			let model       = app.models[k];
-			let extensions  = model.settings.extends || [];
+			let extensions  = (!!model && !!model.settings && model.settings.extends) || [];
 
 			extend(model, extensions);
 		}

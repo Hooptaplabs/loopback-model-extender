@@ -2,24 +2,32 @@
  * Created by roger on 26/05/16.
  */
 
-module.exports = function(options, utils, defaultExtensionFolder) {
+var path = require('path');
+var inform = require('./inform');
+var utils = require('./utils');
+
+module.exports = function(options) {
+
+	var helloworldExtension = (model, options) => {
+		model.helloworldWorks = options;
+	};
 
 	var me = {
 
 		requireExtension(extensionName) {
-
-			let exists = false;
-			var dependency = options.folder + extensionName;
-			try {
-				require.resolve(dependency);
-				exists = true;
-			} catch (e) {}
-
-			if (exists) {
-				return require(dependency);
+			let func = null;
+			if (options.folder) {
+				var dependencyPath = path.resolve(options.folder, extensionName);
+				try {
+					require.resolve(dependencyPath);
+					func = require(dependencyPath);
+				} catch (e) {}
+			}
+			if (!func && extensionName == 'helloworld') {
+				func = helloworldExtension;
 			}
 
-			return require(defaultExtensionFolder + extensionName);
+			return func;
 		},
 
 		anyInputType2ObjectType(input) {
@@ -108,6 +116,8 @@ module.exports = function(options, utils, defaultExtensionFolder) {
 				return;
 			} else if (obj.isDelete) {
 				return;
+			} else if (!obj.function || typeof obj.function != 'function') {
+				inform.throwError(`Extension "${obj.from}" isn't a function.`);
 			}
 
 			obj.function(model, obj.options);

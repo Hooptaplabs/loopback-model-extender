@@ -5,9 +5,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src --out-dir tmp-babel && node ./scripts/uglify && rimraf tmp-babel",
-    "eslint": "eslint ./src; exit 0",
-    "test": "jasmine-node ./spec/ --color",
-    "test-watch": "jasmine-node --autotest ./spec/ --color",
+    "eslint": "eslint ./src",
+    "test": "jasmine-node ./spec --color",
+    "test-watch": "jasmine-node ./spec/ --autotest --watch ./src --color",
     "coverage": "istanbul cover -x '**/spec/**' jasmine-node --captureExceptions ./spec/ --color"
   },
   "repository": {
@@ -28,7 +28,9 @@
     "eslint-config-loopback": "^3.0.1",
     "istanbul": "^0.4.3",
     "jasmine-node": "^1.14.5",
+    "lodash": "^4.13.1",
     "node-uglifier": "^0.4.5",
+    "nodemon": "^1.9.2",
     "rimraf": "^2.5.2"
   }
 }

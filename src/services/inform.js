@@ -3,18 +3,10 @@
  */
 
 
-module.exports = (namespace) => ({
+module.exports = {
 
 	throwError(msg) {
-		throw new Error(this.namespace(msg));
-	},
-
-	log(msg) {
-		console.log(this.namespace(msg));
-	},
-
-	namespace(msg) {
-		return namespace + ': ' + msg;
+		throw new Error(msg);
 	}
 
-});
+};

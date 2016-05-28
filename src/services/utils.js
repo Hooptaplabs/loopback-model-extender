@@ -8,7 +8,7 @@ module.exports = {
 		return obj instanceof Array;
 	},
 
-	addTrailingSlash(text) {
+	addTrailingSlash(text = '') {
 		return text.substr(-1) == '/' ? text : text + '/';
 	}
 
