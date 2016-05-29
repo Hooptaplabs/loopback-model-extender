@@ -1,128 +1,166 @@
 /**
- * Created by roger on 26/05/16.
+ * Created by roger on 29/05/16.
  */
 
-var path = require('path');
-var inform = require('./inform');
-var utils = require('./utils');
+let utils	= require('./utils');
+let path	= require('path');
 
-module.exports = function(options) {
+let demoExtension	= {
+	name:	'demoExtension',
+	func:	(Model, options) => Model.demoProperty = options
+};
 
-	var helloworldExtension = (model, options) => {
-		model.helloworldWorks = options;
-	};
+let me = {
 
-	var me = {
+	extensionFolder: null,
 
-		requireExtension(extensionName) {
-			let func = null;
-			if (options.folder) {
-				var dependencyPath = path.resolve(options.folder, extensionName);
-				try {
-					require.resolve(dependencyPath);
-					func = require(dependencyPath);
-				} catch (e) {}
-			}
-			if (!func && extensionName == 'helloworld') {
-				func = helloworldExtension;
-			}
+	// Sets the folder where we search extensions
+	setExtensionFolder(extensionFolder) {
+		me.extensionFolder = extensionFolder;
+	},
 
-			return func;
-		},
+	// Checks if a object is an Array
+	normalizeExtensions(extensions) {
 
-		anyInputType2ObjectType(input) {
+		extensions		= me._anyFormat2Object(extensions);
+		let excluded	= me._getExcluded(extensions);
+		extensions		= me._removeExcluded(extensions, excluded);
+		extensions		= me._findFunctions(extensions);
 
-			if (utils.isArray(input)) {
-				return input.map(me.anyInputType2ObjectType);
-			}
+		return extensions;
+	},
 
-			var result = {
-				from: null,
-				function: null,
-				options: {},
-				isDelete: false
-			};
+	// Runs all the extensions. Needs normalized format.
+	runExtensions(Model, extensions) {
 
-			if (typeof input === 'string') {
-				var isDelete = input.charAt(0) === '!';
-				var from = isDelete ? input.substring(1) : input;
-
-				result.from     = from;
-				result.function = me.requireExtension(from);
-				result.function = me.requireExtension(from);
-				result.options  = {};
-				result.isDelete = isDelete;
-			} else if (typeof input === 'function') {
-				result.from     = false;
-				result.function = input;
-				result.options  = {};
-				result.isDelete = false;
-			} else if (typeof input === 'object') {
-				result.from     = input.from;
-				result.function = me.requireExtension(input.from);
-				result.options  = input.options || {};
-				result.isDelete = false;
-			}
-
-			return result;
-		},
-
-
-		removeExcludedItems(list) {
-			var excluded = me.getExcludeList(list);
-			return me.removeExcluded(list, excluded);
-		},
-
-		getExcludeList(input) {
-
-			if (utils.isArray(input)) {
-				return input.filter(me.getExcludeList).map(item => item.from);
-			}
-
-			if (input && input.from && input.isDelete) {
-				return true;
-			}
-
-			return false;
-		},
-
-		removeExcluded(list, excluded) {
-
-			if (utils.isArray(list)) {
-				return list.filter(item => me.removeExcluded(item, excluded));
-			}
-
-			if (!list || !list.from) {
-				return false;
-			}
-			if (list.isDelete) {
-				return false;
-			}
-			if (~excluded.indexOf(list.from)) {
-				return false;
-			}
-
-			return true;
-		},
-
-		runFunctions(model, obj) {
-
-			if (utils.isArray(obj)) {
-				obj.forEach(item => me.runFunctions(model, item));
-				return;
-			}
-
-			if (obj.from === null) {
-				return;
-			} else if (obj.isDelete) {
-				return;
-			} else if (!obj.function || typeof obj.function != 'function') {
-				inform.throwError(`Extension "${obj.from}" isn't a function.`);
-			}
-
-			obj.function(model, obj.options);
+		if (!utils.isLoopbackModel(Model)) {
+			throw new Error('Method core.runExtensions needs first argument to be a Loopback model.');
+		}
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core.runExtensions needs second argument to be an Array.');
 		}
 
-	};
-	return me;
+		extensions
+			.forEach(extension => extension && extension.func && extension.func(Model, extension.options || {}));
+	},
+
+	// Adds the functions to the extensions
+	_findFunctions(extensions) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._findFunctions needs first argument to be an Array.');
+		}
+
+		return extensions.map(extension => {
+			if (!extension.func && extension.name) {
+				extension.func = me._getExtensionFunction(extension.name);
+			}
+			return extension;
+		});
+	},
+
+	// Removes extensions that are excluded
+	_removeExcluded(extensions, excluded) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._removeExcluded needs first argument to be an Array.');
+		}
+		if (!utils.isArray(excluded)) {
+			throw new Error('Method core._removeExcluded needs second argument to be an Array.');
+		}
+
+		return extensions.filter(extension => !extension.name || !~excluded.indexOf(extension.name));
+	},
+
+	// Returns an Array with excluded extensions. Need normalized to obj array.
+	_getExcluded(extensions) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._getExcluded needs first argument to be an Array.');
+		}
+
+		return extensions.reduce((excluded, current) => {
+			if (typeof current != 'object' ||
+				!current.hasOwnProperty('isDelete') ||
+				!current.hasOwnProperty('name')) {
+				throw new Error('Method core._getExcluded needs object format.');
+			}
+			if (current.isDelete) {
+				excluded.push(current.name);
+			}
+			return excluded;
+		}, []);
+	},
+
+	_anyFormat2Object(extensions) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._anyFormat2Object needs first argument to be an Array.');
+		}
+
+		return extensions.map(extension => {
+
+			// String
+			if (typeof extension == 'string') {
+				let isDelete	= extension.charAt(0) === '!';
+				let name		= isDelete ? extension.substring(1) : extension;
+				return {
+					name: name,
+					options: null,
+					isDelete: isDelete,
+					func: null
+				};
+			}
+
+			// Function
+			if (typeof extension == 'function') {
+				return {
+					name: null,
+					options: null,
+					isDelete: false,
+					func: extension
+				};
+			}
+
+			// Object
+			if (typeof extension == 'object' && extension.name) {
+				let isDelete	= extension.isDelete || extension.name.charAt(0) === '!';
+				let name		= extension.name.charAt(0) === '!' ? extension.name.substring(1) : extension.name;
+				return {
+					name: name,
+					options: extension.options || {},
+					isDelete: isDelete,
+					func: extension.func || null
+				};
+			}
+
+			throw new Error('Unknown extension format.');
+		});
+
+	},
+
+	_getExtensionFunction(extensionName) {
+		let extensionPath = false;
+		if (me.extensionFolder) {
+			extensionPath = path.resolve(me.extensionFolder, extensionName);
+		}
+		let func = null;
+		if (extensionPath && utils.isRequerible(extensionPath)) {
+			func = require(extensionPath);
+		} else if (extensionName == demoExtension.name) {
+			func = demoExtension.func;
+		}
+
+		if (func) {
+			if (typeof func == 'function') {
+				return func;
+			} else {
+				throw Error(`Extension "${extensionName}" invalid.`);
+			}
+		}
+
+		throw Error(`Extension "${extensionName}" not found.`);
+	}
+
 };
+module.exports = me;

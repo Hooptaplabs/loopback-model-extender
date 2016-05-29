@@ -1,228 +1,326 @@
 var cachedModules=[];
-cachedModules[5654]={exports:{}};
-(function(module,exports) {"use strict";
-
-/**
- * Created by roger on 26/05/16.
- */
-
-module.exports = {
-	throwError: function throwError(msg) {
-		throw new Error(msg);
-	}
-};}).call(this,cachedModules[5654],cachedModules[5654].exports);
-cachedModules[38]={exports:{}};
+cachedModules[2633]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
- * Created by roger on 26/05/16.
+ * Created by roger on 29/05/16.
  */
 
-module.exports = {
-	isArray: function isArray(obj) {
-		return obj instanceof Array;
-	},
-	addTrailingSlash: function addTrailingSlash() {
-		var text = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
+var fs = require('fs');
 
-		return text.substr(-1) == '/' ? text : text + '/';
+var me = {
+
+	// Checks if a file exists
+
+	exists: function exists(path) {
+		try {
+			fs.accessSync(path, fs.F_OK);
+		} catch (e) {
+			return false;
+		}
+		return true;
+	},
+
+
+	// Checks if a path points to a directory
+	isDirectory: function isDirectory(path) {
+		return me.exists(path) && fs.lstatSync(path).isDirectory();
 	}
-};}).call(this,cachedModules[38],cachedModules[38].exports);
-cachedModules[1659]={exports:{}};
+};
+module.exports = me;}).call(this,cachedModules[2633],cachedModules[2633].exports);
+cachedModules[2957]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 /**
- * Created by roger on 26/05/16.
+ * Created by roger on 29/05/16.
  */
 
-var path = require('path');
-var inform = cachedModules[5654].exports;
-var utils = cachedModules[38].exports;
+module.exports = {
 
-module.exports = function (options) {
+	// Checks if a object is an Array
 
-	var helloworldExtension = function helloworldExtension(model, options) {
-		model.helloworldWorks = options;
-	};
+	isArray: function isArray(obj) {
+		var compatibilityMode = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
 
-	var me = {
-		requireExtension: function requireExtension(extensionName) {
-			var func = null;
-			if (options.folder) {
-				var dependencyPath = path.resolve(options.folder, extensionName);
-				try {
-					require.resolve(dependencyPath);
-					func = require(dependencyPath);
-				} catch (e) {}
-			}
-			if (!func && extensionName == 'helloworld') {
-				func = helloworldExtension;
-			}
-
-			return func;
-		},
-		anyInputType2ObjectType: function anyInputType2ObjectType(input) {
-
-			if (utils.isArray(input)) {
-				return input.map(me.anyInputType2ObjectType);
-			}
-
-			var result = {
-				from: null,
-				function: null,
-				options: {},
-				isDelete: false
-			};
-
-			if (typeof input === 'string') {
-				var isDelete = input.charAt(0) === '!';
-				var from = isDelete ? input.substring(1) : input;
-
-				result.from = from;
-				result.function = me.requireExtension(from);
-				result.function = me.requireExtension(from);
-				result.options = {};
-				result.isDelete = isDelete;
-			} else if (typeof input === 'function') {
-				result.from = false;
-				result.function = input;
-				result.options = {};
-				result.isDelete = false;
-			} else if ((typeof input === 'undefined' ? 'undefined' : _typeof(input)) === 'object') {
-				result.from = input.from;
-				result.function = me.requireExtension(input.from);
-				result.options = input.options || {};
-				result.isDelete = false;
-			}
-
-			return result;
-		},
-		removeExcludedItems: function removeExcludedItems(list) {
-			var excluded = me.getExcludeList(list);
-			return me.removeExcluded(list, excluded);
-		},
-		getExcludeList: function getExcludeList(input) {
-
-			if (utils.isArray(input)) {
-				return input.filter(me.getExcludeList).map(function (item) {
-					return item.from;
-				});
-			}
-
-			if (input && input.from && input.isDelete) {
-				return true;
-			}
-
-			return false;
-		},
-		removeExcluded: function removeExcluded(list, excluded) {
-
-			if (utils.isArray(list)) {
-				return list.filter(function (item) {
-					return me.removeExcluded(item, excluded);
-				});
-			}
-
-			if (!list || !list.from) {
-				return false;
-			}
-			if (list.isDelete) {
-				return false;
-			}
-			if (~excluded.indexOf(list.from)) {
-				return false;
-			}
-
-			return true;
-		},
-		runFunctions: function runFunctions(model, obj) {
-
-			if (utils.isArray(obj)) {
-				obj.forEach(function (item) {
-					return me.runFunctions(model, item);
-				});
-				return;
-			}
-
-			if (obj.from === null) {
-				return;
-			} else if (obj.isDelete) {
-				return;
-			} else if (!obj.function || typeof obj.function != 'function') {
-				inform.throwError('Extension "' + obj.from + '" isn\'t a function.');
-			}
-
-			obj.function(model, obj.options);
+		if (Array.isArray && !compatibilityMode) {
+			return Array.isArray(obj);
+		} else {
+			return toString.call(obj) === '[object Array]';
 		}
-	};
-	return me;
-};}).call(this,cachedModules[1659],cachedModules[1659].exports);'use strict';
+	},
+
+
+	// Checks if an object is a Loopback Model (dirty check)
+	isLoopbackModel: function isLoopbackModel(obj) {
+		//if (!obj) {
+		//	return false;
+		//}
+		//if (typeof obj != 'object') {
+		//	return false;
+		//}
+		//if (!obj.definition) {
+		//	return false;
+		//}
+		//if (!obj.settings) {
+		//	return false;
+		//}
+		//return true;
+		return !!(obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) == 'object' && obj.definition && obj.settings);
+	},
+
+
+	// Checks if an object is a Loopback App (dirty check)
+	isLoopbackApp: function isLoopbackApp(obj) {
+		return !!(obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) == 'object' && obj.models);
+	},
+
+
+	// Checks if a path points to a file that can be resolved by require
+	isRequerible: function isRequerible(path) {
+		try {
+			require.resolve(path);
+		} catch (e) {
+			return false;
+		}
+		return true;
+	}
+};}).call(this,cachedModules[2957],cachedModules[2957].exports);
+cachedModules[2369]={exports:{}};
+(function(module,exports) {'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 /**
- * Created by roger on 25/05/16.
+ * Created by roger on 29/05/16.
  */
 
-var inform = cachedModules[5654].exports;
-var utils = cachedModules[38].exports;
-var Core = cachedModules[1659].exports;
+var utils = cachedModules[2957].exports;
+var path = require('path');
+
+var demoExtension = {
+	name: 'demoExtension',
+	func: function func(Model, options) {
+		return Model.demoProperty = options;
+	}
+};
+
+var me = {
+
+	extensionFolder: null,
+
+	// Sets the folder where we search extensions
+	setExtensionFolder: function setExtensionFolder(extensionFolder) {
+		me.extensionFolder = extensionFolder;
+	},
+
+
+	// Checks if a object is an Array
+	normalizeExtensions: function normalizeExtensions(extensions) {
+
+		extensions = me._anyFormat2Object(extensions);
+		var excluded = me._getExcluded(extensions);
+		extensions = me._removeExcluded(extensions, excluded);
+		extensions = me._findFunctions(extensions);
+
+		return extensions;
+	},
+
+
+	// Runs all the extensions. Needs normalized format.
+	runExtensions: function runExtensions(Model, extensions) {
+
+		if (!utils.isLoopbackModel(Model)) {
+			throw new Error('Method core.runExtensions needs first argument to be a Loopback model.');
+		}
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core.runExtensions needs second argument to be an Array.');
+		}
+
+		extensions.forEach(function (extension) {
+			return extension && extension.func && extension.func(Model, extension.options || {});
+		});
+	},
+
+
+	// Adds the functions to the extensions
+	_findFunctions: function _findFunctions(extensions) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._findFunctions needs first argument to be an Array.');
+		}
+
+		return extensions.map(function (extension) {
+			if (!extension.func && extension.name) {
+				extension.func = me._getExtensionFunction(extension.name);
+			}
+			return extension;
+		});
+	},
+
+
+	// Removes extensions that are excluded
+	_removeExcluded: function _removeExcluded(extensions, excluded) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._removeExcluded needs first argument to be an Array.');
+		}
+		if (!utils.isArray(excluded)) {
+			throw new Error('Method core._removeExcluded needs second argument to be an Array.');
+		}
+
+		return extensions.filter(function (extension) {
+			return !extension.name || ! ~excluded.indexOf(extension.name);
+		});
+	},
+
+
+	// Returns an Array with excluded extensions. Need normalized to obj array.
+	_getExcluded: function _getExcluded(extensions) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._getExcluded needs first argument to be an Array.');
+		}
+
+		return extensions.reduce(function (excluded, current) {
+			if ((typeof current === 'undefined' ? 'undefined' : _typeof(current)) != 'object' || !current.hasOwnProperty('isDelete') || !current.hasOwnProperty('name')) {
+				throw new Error('Method core._getExcluded needs object format.');
+			}
+			if (current.isDelete) {
+				excluded.push(current.name);
+			}
+			return excluded;
+		}, []);
+	},
+	_anyFormat2Object: function _anyFormat2Object(extensions) {
+
+		if (!utils.isArray(extensions)) {
+			throw new Error('Method core._anyFormat2Object needs first argument to be an Array.');
+		}
+
+		return extensions.map(function (extension) {
+
+			// String
+			if (typeof extension == 'string') {
+				var isDelete = extension.charAt(0) === '!';
+				var name = isDelete ? extension.substring(1) : extension;
+				return {
+					name: name,
+					options: null,
+					isDelete: isDelete,
+					func: null
+				};
+			}
+
+			// Function
+			if (typeof extension == 'function') {
+				return {
+					name: null,
+					options: null,
+					isDelete: false,
+					func: extension
+				};
+			}
+
+			// Object
+			if ((typeof extension === 'undefined' ? 'undefined' : _typeof(extension)) == 'object' && extension.name) {
+				var _isDelete = extension.isDelete || extension.name.charAt(0) === '!';
+				var _name = extension.name.charAt(0) === '!' ? extension.name.substring(1) : extension.name;
+				return {
+					name: _name,
+					options: extension.options || {},
+					isDelete: _isDelete,
+					func: extension.func || null
+				};
+			}
+
+			throw new Error('Unknown extension format.');
+		});
+	},
+	_getExtensionFunction: function _getExtensionFunction(extensionName) {
+		var extensionPath = false;
+		if (me.extensionFolder) {
+			extensionPath = path.resolve(me.extensionFolder, extensionName);
+		}
+		var func = null;
+		if (extensionPath && utils.isRequerible(extensionPath)) {
+			func = require(extensionPath);
+		} else if (extensionName == demoExtension.name) {
+			func = demoExtension.func;
+		}
+
+		if (func) {
+			if (typeof func == 'function') {
+				return func;
+			} else {
+				throw Error('Extension "' + extensionName + '" invalid.');
+			}
+		}
+
+		throw Error('Extension "' + extensionName + '" not found.');
+	}
+};
+module.exports = me;}).call(this,cachedModules[2369],cachedModules[2369].exports);'use strict';
+
+/**
+ * Created by roger on 29/05/16.
+ */
+
+var file = cachedModules[2633].exports;
+var utils = cachedModules[2957].exports;
+var core = cachedModules[2369].exports;
 
 module.exports = function () {
-	var options = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	var extensionFolder = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
 
 
-	// Prepare
-	var app = options.app || false;
-	var core = Core(options);
-	options.folder = utils.addTrailingSlash(options.folder);
-
-	// Extend models of the app if available
-	if (app && app.models) {
-		extendAppModels(app);
+	// Check extension folder
+	if (typeof extensionFolder != 'string') {
+		throw new Error('First argument must be a String.');
+	} else if (extensionFolder) {
+		if (!file.exists(extensionFolder)) {
+			throw new Error('Extension folder unreachable.');
+		} else if (!file.isDirectory(extensionFolder)) {
+			throw new Error('Extension folder does not seem to be a folder.');
+		}
+		core.setExtensionFolder(extensionFolder);
 	}
 
-	// Return function if you want launch extender manually
-	return extend;
+	// Return service
+	var me = extendApp;
+	me.extend = extend;
+	me.extendApp = extendApp;
+	return me;
 
-	/*	Functions
-  ---------------------------------------------------------------------------------*/
+	function extend(Model, extensions) {
 
-	function extendAppModels(app) {
-		for (var k in app.models) {
-			if (!app.models.hasOwnProperty(k)) return;
-
-			var model = app.models[k];
-			var extensions = !!model && !!model.settings && model.settings.extends || [];
-
-			extend(model, extensions);
+		if (!Model || !utils.isLoopbackModel(Model)) {
+			throw new Error('Method "extend" requires first argument to be a Loopback Model.');
 		}
+
+		if (!extensions || !utils.isArray(extensions)) {
+			throw new Error('Method "extend" requires second argument to be an Array.');
+		}
+
+		extensions = core.normalizeExtensions(extensions);
+		core.runExtensions(Model, extensions);
 	}
 
-	function extend(model, list) {
+	function extendApp(app) {
 
-		// Checks if inputs are valid
-		checkInputs(model, list);
-
-		// Transform any form of input to object
-		list = core.anyInputType2ObjectType(list);
-
-		// Remove the excluded list
-		list = core.removeExcludedItems(list);
-
-		// Load one by one all extensions
-		core.runFunctions(model, list);
-	}
-
-	function checkInputs(model, list) {
-		if (!model) {
-			inform.throwError('Must include the model as first argument.');
+		if (!app || !utils.isLoopbackApp(app)) {
+			throw new Error('Method "extendApp" requires first argument to be a Loopback App.');
 		}
-		if (!list) {
-			inform.throwError('Must include the list as second argument.');
-		}
-		if (!utils.isArray(list)) {
-			inform.throwError('Second argument list must be an Array.');
-		}
+
+		app.models.forEach(function (Model) {
+
+			if (!app || !utils.isLoopbackModel(Model)) {
+				throw new Error('Found a model that isn\'t a Loopback Model.');
+			}
+
+			var extensions = Model.settings.extends || [];
+			extend(Model, extensions);
+		});
 	}
 };
