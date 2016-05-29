@@ -7,8 +7,8 @@
     "build": "babel src --out-dir tmp-babel && node ./scripts/uglify && rimraf tmp-babel",
     "lint": "eslint ./src && eslint ./test/*",
     "test": "mocha --compilers js:babel-register",
-    "test:watch": "mocha --compilers js:babel-register --watch",
-    "coverage": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha"
+    "test:watch": "mocha --compilers js:babel-register --watch --reporter min",
+    "coverage": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --reporter min"
   },
   "repository": {
     "type": "git",
