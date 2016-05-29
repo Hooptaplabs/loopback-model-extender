@@ -10,6 +10,8 @@ Loopback Model Extender
 Loopback-model-extender is a json-centered extends library for Loopback Api Rest. It allow you specify
 a list of functions that will extend your models.
 
+**Deprecate warning**: This document it's outdated and need to be modified shortly to explain the new usage of this tool.
+
 Short explanation
 ---------
 
