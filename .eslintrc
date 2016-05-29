@@ -9,7 +9,7 @@
     "browser": true
   },
   "rules": {
-    "max-len": [2, 100, 4, {
+    "max-len": [2, 140, 4, {
       "ignoreComments": true,
       "ignoreUrls": true,
       "ignorePattern": "^\\s*var\\s.+=\\s*(require\\s*\\()|(/)"
