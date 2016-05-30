@@ -46,7 +46,11 @@ module.exports = (extensionFolder = '') => {
 			throw new Error('Method "extendApp" requires first argument to be a Loopback App.');
 		}
 
-		app.models.forEach(Model => {
+		for (let i in app.models) {
+			if (!app.models.hasOwnProperty(i)) {
+				return;
+			}
+			let Model = app.models[i];
 
 			if (!app || !utils.isLoopbackModel(Model)) {
 				throw new Error('Found a model that isn\'t a Loopback Model.');
@@ -54,7 +58,7 @@ module.exports = (extensionFolder = '') => {
 
 			let extensions = Model.settings.extends || [];
 			extend(Model, extensions);
-		});
+		}
 
 
 	}
