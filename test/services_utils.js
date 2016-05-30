@@ -4,6 +4,13 @@ var path	= require('path');
 var expect	= require('chai').expect;
 let validLoopbackApp = function() {};
 validLoopbackApp.models = [];
+let createLoopbackModel	= () => {
+	let r = function() {};
+	r.definition	= {};
+	r.settings		= {};
+	return r;
+};
+
 
 var service	= require('../src/services/utils');
 
@@ -77,7 +84,7 @@ describe('Service "utils"', () => {
 		});
 
 		it('returns true if is a Loopback model', () => {
-			expect(isLoopbackModel({definition: {}, settings: {}})).to.equal(true);
+			expect(isLoopbackModel(createLoopbackModel())).to.equal(true);
 		});
 
 		it('returns false if is not a Loopback model', () => {
