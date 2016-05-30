@@ -3,8 +3,16 @@ let _		= require('lodash');
 let path	= require('path');
 let expect	= require('chai').expect;
 
-var extensionsMockPath = path.resolve(__dirname, './extensionsMock');
-var loopbackModel		= {definition: {}, settings: {}};
+var extensionsMockPath	= path.resolve(__dirname, './extensionsMock');
+var loopbackModel		= function() {};
+loopbackModel.definition	= {};
+loopbackModel.settings		= {};
+let createLoopbackModel	= () => {
+	let r = function() {};
+	r.definition	= {};
+	r.settings		= {};
+	return r;
+};
 
 let service	= require('../src/services/core');
 
@@ -251,19 +259,22 @@ describe('Service "core"', () => {
 			let err = 'Method core.runExtensions needs first argument to be a Loopback model.';
 			expect(() => run({})).to.throw(err);
 			expect(() => run()).to.throw(err);
-			expect(() => run(loopbackModel)).to.not.throw(err);
+			expect(() => run(createLoopbackModel())).to.not.throw(err);
 		});
 
 		it('only allow Array as second argument', () => {
 			let err = 'Method core.runExtensions needs second argument to be an Array.';
-			expect(() => run(loopbackModel, {})).to.throw(err);
-			expect(() => run(loopbackModel, [])).to.not.throw();
+			expect(() => run(createLoopbackModel(), {})).to.throw(err);
+			expect(() => run(createLoopbackModel(), [])).to.not.throw();
 		});
 
 		it('extends the model with functions', () => {
-			let extensions	= [{func: model => model.works = true}];
-			extensions.push({func: model => model.other = 32});
-			let Model		= _.cloneDeep(loopbackModel);
+			let extensions	= [
+				{func: model => model.works = true},
+				{func: model => model.other = 32}
+			];
+			let Model = createLoopbackModel();
+			console.log(typeof Model);
 			run(Model, extensions);
 			expect(Model.works).to.equal(true);
 			expect(Model.other).to.equal(32);

@@ -3,6 +3,12 @@ var _		= require('lodash');
 var path	= require('path');
 var expect	= require('chai').expect;
 var extensionsMockPath = path.resolve(__dirname, './extensionsMock');
+let createLoopbackModel	= () => {
+	let r = function() {};
+	r.definition	= {};
+	r.settings		= {};
+	return r;
+};
 
 var service	= require('../src/index');
 
@@ -58,18 +64,16 @@ describe('Service.extend', () => {
 	var extend, Model;
 	beforeEach(() => {
 		extend = service(extensionsMockPath).extend;
-		Model	= {
-			settings: {},
-			definition: {}
-		};
+		Model	= createLoopbackModel();
 	});
 
 	it('requires first argument to be a loopback model', () => {
 		var err		= 'Method "extend" requires first argument to be a Loopback Model.';
 		expect(() => extend()).to.throw(err);
 		expect(() => extend({})).to.throw(err);
+		expect(() => extend(() => {})).to.throw(err);
 		expect(() => extend({settings: {}})).to.throw(err);
-		expect(() => extend({settings: {}, definition: {}})).to.not.throw(err);
+		expect(() => extend(createLoopbackModel())).to.not.throw(err);
 	});
 
 	it('requires second argument to be an Array', () => {
@@ -80,9 +84,9 @@ describe('Service.extend', () => {
 	});
 
 	it('doesn\'t modify the model if not extensions', () => {
-		let copy = _.cloneDeep(Model);
+		let copy = createLoopbackModel();
 		extend(Model, []);
-		expect(Model).to.deep.equal(copy);
+		expect(Model.toString()).to.deep.equal(copy.toString());
 	});
 
 	it('modify the model if there are extensions', () => {
@@ -99,11 +103,8 @@ describe('Service.extendApp', () => {
 
 	var extendApp, Model, App;
 	beforeEach(() => {
-		extendApp = service(extensionsMockPath).extendApp;
-		Model	= {
-			settings: {},
-			definition: {}
-		};
+		extendApp	= service(extensionsMockPath).extendApp;
+		Model		= createLoopbackModel();
 		App = function() {};
 		App.models = [Model];
 	});

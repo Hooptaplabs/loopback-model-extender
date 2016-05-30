@@ -28,7 +28,7 @@ module.exports = {
 		//	return false;
 		//}
 		//return true;
-		return !!(obj && typeof obj == 'object' && obj.definition && obj.settings);
+		return !!(obj && typeof obj == 'function' && obj.hasOwnProperty('definition') && obj.hasOwnProperty('settings'));
 	},
 
 	// Checks if an object is a Loopback App (dirty check)
