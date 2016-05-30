@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[2633]={exports:{}};
+cachedModules[4610]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -27,8 +27,8 @@ var me = {
 		return me.exists(path) && fs.lstatSync(path).isDirectory();
 	}
 };
-module.exports = me;}).call(this,cachedModules[2633],cachedModules[2633].exports);
-cachedModules[2957]={exports:{}};
+module.exports = me;}).call(this,cachedModules[4610],cachedModules[4610].exports);
+cachedModules[3507]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -73,7 +73,7 @@ module.exports = {
 
 	// Checks if an object is a Loopback App (dirty check)
 	isLoopbackApp: function isLoopbackApp(obj) {
-		return !!(obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) == 'object' && obj.models);
+		return !!(obj && typeof obj == 'function' && obj.hasOwnProperty('models'));
 	},
 
 
@@ -86,8 +86,8 @@ module.exports = {
 		}
 		return true;
 	}
-};}).call(this,cachedModules[2957],cachedModules[2957].exports);
-cachedModules[2369]={exports:{}};
+};}).call(this,cachedModules[3507],cachedModules[3507].exports);
+cachedModules[3737]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -96,7 +96,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * Created by roger on 29/05/16.
  */
 
-var utils = cachedModules[2957].exports;
+var utils = cachedModules[3507].exports;
 var path = require('path');
 
 var demoExtension = {
@@ -261,15 +261,15 @@ var me = {
 		throw Error('Extension "' + extensionName + '" not found.');
 	}
 };
-module.exports = me;}).call(this,cachedModules[2369],cachedModules[2369].exports);'use strict';
+module.exports = me;}).call(this,cachedModules[3737],cachedModules[3737].exports);'use strict';
 
 /**
  * Created by roger on 29/05/16.
  */
 
-var file = cachedModules[2633].exports;
-var utils = cachedModules[2957].exports;
-var core = cachedModules[2369].exports;
+var file = cachedModules[4610].exports;
+var utils = cachedModules[3507].exports;
+var core = cachedModules[3737].exports;
 
 module.exports = function () {
 	var extensionFolder = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
