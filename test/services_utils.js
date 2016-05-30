@@ -2,6 +2,8 @@
 //var _		= require('lodash');
 var path	= require('path');
 var expect	= require('chai').expect;
+let validLoopbackApp = function() {};
+validLoopbackApp.models = [];
 
 var service	= require('../src/services/utils');
 
@@ -68,10 +70,7 @@ describe('Service "utils"', () => {
 
 	describe('method "isLoopbackModel"', () => {
 
-		var isLoopbackModel;
-		beforeEach(() => {
-			isLoopbackModel = service.isLoopbackModel;
-		});
+		var isLoopbackModel = service.isLoopbackModel;
 
 		it('it\'s a function', () => {
 			expect(isLoopbackModel).to.be.a('function');
@@ -100,7 +99,7 @@ describe('Service "utils"', () => {
 		});
 
 		it('returns true if is a Loopback App', () => {
-			expect(isLoopbackApp({models: []})).to.equal(true);
+			expect(isLoopbackApp(validLoopbackApp)).to.equal(true);
 		});
 
 		it('returns false if is not a Loopback app', () => {
@@ -108,6 +107,7 @@ describe('Service "utils"', () => {
 			expect(isLoopbackApp('')).to.equal(false);
 			expect(isLoopbackApp({})).to.equal(false);
 			expect(isLoopbackApp({nope: {}})).to.equal(false);
+			expect(isLoopbackApp({models: []})).to.equal(false);
 		});
 
 	});
