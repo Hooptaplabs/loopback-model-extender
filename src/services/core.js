@@ -80,6 +80,7 @@ let me = {
 		}
 
 		return extensions.reduce((excluded, current) => {
+
 			if (typeof current != 'object' ||
 				!current.hasOwnProperty('isDelete') ||
 				!current.hasOwnProperty('name')) {

@@ -2,9 +2,9 @@
  * Created by roger on 29/05/16.
  */
 
-var fs = require('fs');
+let fs = require('fs');
 
-var me = {
+let me = {
 
 	// Checks if a file exists
 	exists(path) {

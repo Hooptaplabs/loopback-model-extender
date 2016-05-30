@@ -136,4 +136,9 @@ describe('Service.extendApp', () => {
 		expect(Model.validExtension).to.be.an('object');
 	});
 
+	it('ignores the app.models prototypes', () => {
+		App.models.__proto__.thisShouldNotMessUp = 'hi';
+		expect(() => extendApp(App)).to.not.throw();
+	});
+
 });

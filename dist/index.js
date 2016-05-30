@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[8991]={exports:{}};
+cachedModules[5204]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -27,8 +27,8 @@ var me = {
 		return me.exists(path) && fs.lstatSync(path).isDirectory();
 	}
 };
-module.exports = me;}).call(this,cachedModules[8991],cachedModules[8991].exports);
-cachedModules[9831]={exports:{}};
+module.exports = me;}).call(this,cachedModules[5204],cachedModules[5204].exports);
+cachedModules[6881]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -84,8 +84,8 @@ module.exports = {
 		}
 		return true;
 	}
-};}).call(this,cachedModules[9831],cachedModules[9831].exports);
-cachedModules[7275]={exports:{}};
+};}).call(this,cachedModules[6881],cachedModules[6881].exports);
+cachedModules[1017]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -94,7 +94,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * Created by roger on 29/05/16.
  */
 
-var utils = cachedModules[9831].exports;
+var utils = cachedModules[6881].exports;
 var path = require('path');
 
 var demoExtension = {
@@ -182,6 +182,7 @@ var me = {
 		}
 
 		return extensions.reduce(function (excluded, current) {
+
 			if ((typeof current === 'undefined' ? 'undefined' : _typeof(current)) != 'object' || !current.hasOwnProperty('isDelete') || !current.hasOwnProperty('name')) {
 				throw new Error('Method core._getExcluded needs object format.');
 			}
@@ -259,15 +260,15 @@ var me = {
 		throw Error('Extension "' + extensionName + '" not found.');
 	}
 };
-module.exports = me;}).call(this,cachedModules[7275],cachedModules[7275].exports);'use strict';
+module.exports = me;}).call(this,cachedModules[1017],cachedModules[1017].exports);'use strict';
 
 /**
  * Created by roger on 29/05/16.
  */
 
-var file = cachedModules[8991].exports;
-var utils = cachedModules[9831].exports;
-var core = cachedModules[7275].exports;
+var file = cachedModules[5204].exports;
+var utils = cachedModules[6881].exports;
+var core = cachedModules[1017].exports;
 
 module.exports = function () {
 	var extensionFolder = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
@@ -312,9 +313,8 @@ module.exports = function () {
 		}
 
 		for (var i in app.models) {
-			if (!app.models.hasOwnProperty(i)) {
-				return;
-			}
+			if (!app.models.hasOwnProperty(i)) return;
+
 			var Model = app.models[i];
 
 			if (!app || !utils.isLoopbackModel(Model)) {

@@ -2,7 +2,7 @@
  * Created by roger on 29/05/16.
  */
 
-var file	= require('./services/file');
+let file	= require('./services/file');
 let utils	= require('./services/utils');
 let core	= require('./services/core');
 
@@ -47,9 +47,8 @@ module.exports = (extensionFolder = '') => {
 		}
 
 		for (let i in app.models) {
-			if (!app.models.hasOwnProperty(i)) {
-				return;
-			}
+			if (!app.models.hasOwnProperty(i)) return;
+
 			let Model = app.models[i];
 
 			if (!app || !utils.isLoopbackModel(Model)) {
