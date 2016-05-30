@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[8787]={exports:{}};
+cachedModules[8991]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -27,11 +27,9 @@ var me = {
 		return me.exists(path) && fs.lstatSync(path).isDirectory();
 	}
 };
-module.exports = me;}).call(this,cachedModules[8787],cachedModules[8787].exports);
-cachedModules[7124]={exports:{}};
+module.exports = me;}).call(this,cachedModules[8991],cachedModules[8991].exports);
+cachedModules[9831]={exports:{}};
 (function(module,exports) {'use strict';
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 /**
  * Created by roger on 29/05/16.
@@ -67,7 +65,7 @@ module.exports = {
 		//	return false;
 		//}
 		//return true;
-		return !!(obj && (typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) == 'object' && obj.definition && obj.settings);
+		return !!(obj && typeof obj == 'function' && obj.hasOwnProperty('definition') && obj.hasOwnProperty('settings'));
 	},
 
 
@@ -86,8 +84,8 @@ module.exports = {
 		}
 		return true;
 	}
-};}).call(this,cachedModules[7124],cachedModules[7124].exports);
-cachedModules[3143]={exports:{}};
+};}).call(this,cachedModules[9831],cachedModules[9831].exports);
+cachedModules[7275]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -96,7 +94,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * Created by roger on 29/05/16.
  */
 
-var utils = cachedModules[7124].exports;
+var utils = cachedModules[9831].exports;
 var path = require('path');
 
 var demoExtension = {
@@ -261,15 +259,15 @@ var me = {
 		throw Error('Extension "' + extensionName + '" not found.');
 	}
 };
-module.exports = me;}).call(this,cachedModules[3143],cachedModules[3143].exports);'use strict';
+module.exports = me;}).call(this,cachedModules[7275],cachedModules[7275].exports);'use strict';
 
 /**
  * Created by roger on 29/05/16.
  */
 
-var file = cachedModules[8787].exports;
-var utils = cachedModules[7124].exports;
-var core = cachedModules[3143].exports;
+var file = cachedModules[8991].exports;
+var utils = cachedModules[9831].exports;
+var core = cachedModules[7275].exports;
 
 module.exports = function () {
 	var extensionFolder = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
