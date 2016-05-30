@@ -104,9 +104,8 @@ describe('Service.extendApp', () => {
 			settings: {},
 			definition: {}
 		};
-		App	= {
-			models: [Model]
-		};
+		App = function() {};
+		App.models = [Model];
 	});
 
 	it('requires first argument to be a loopback app', () => {

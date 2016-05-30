@@ -33,7 +33,7 @@ module.exports = {
 
 	// Checks if an object is a Loopback App (dirty check)
 	isLoopbackApp(obj) {
-		return !!(obj && typeof obj == 'object' && obj.models);
+		return !!(obj && typeof obj == 'function' && obj.hasOwnProperty('models'));
 	},
 
 	// Checks if a path points to a file that can be resolved by require
