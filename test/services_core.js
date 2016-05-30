@@ -49,6 +49,11 @@ describe('Service "core"', () => {
 			expect(method('validExtension')).to.be.a('function');
 		});
 
+		it('allows undefined folder', () => {
+			service.extensionFolder = null;
+			expect(() => method('validExtension')).to.throw('Extension "validExtension" not found.');
+		});
+
 		it('detects if unknown extension', () => {
 			expect(() => method('nope')).to.throw('Extension "nope" not found.');
 		});
@@ -157,9 +162,11 @@ describe('Service "core"', () => {
 		});
 
 		it('only allow normalized input', () => {
+			let func1 = function() {};
+			func1.isDelete	= {};
 			let err = 'Method core._getExcluded needs object format.';
 			expect(() => getExcluded(['hello'])).to.throw(err);
-			expect(() => getExcluded([() => {}])).to.throw(err);
+			expect(() => getExcluded([func1])).to.throw(err);
 			expect(() => getExcluded([{}])).to.throw(err);
 			expect(() => getExcluded([{isDelete: true}])).to.throw(err);
 			expect(() => getExcluded([{name: 'asd'}])).to.throw(err);
@@ -274,7 +281,6 @@ describe('Service "core"', () => {
 				{func: model => model.other = 32}
 			];
 			let Model = createLoopbackModel();
-			console.log(typeof Model);
 			run(Model, extensions);
 			expect(Model.works).to.equal(true);
 			expect(Model.other).to.equal(32);
