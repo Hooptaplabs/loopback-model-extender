@@ -7,7 +7,7 @@ install:
   - npm run test
   - npm run build
 after_success:
-  - npm run coverage
+  - npm run test:cover
   - npm install codeclimate-test-reporter
   - ./node_modules/codeclimate-test-reporter/bin/codeclimate.js < coverage/lcov.info
 addons:

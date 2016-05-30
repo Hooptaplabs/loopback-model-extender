@@ -1,6 +1,6 @@
 {
   "name": "loopback-model-extender",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A json centered loopback model extender",
   "main": "dist/index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "lint": "eslint ./src && eslint ./test/*",
     "test": "mocha --compilers js:babel-register",
     "test:watch": "mocha --compilers js:babel-register --watch --reporter min",
-    "coverage": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --reporter min"
+    "test:cover": "babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha -- --reporter min"
   },
   "repository": {
     "type": "git",

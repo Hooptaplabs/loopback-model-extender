@@ -1,5 +1,5 @@
 var cachedModules=[];
-cachedModules[4610]={exports:{}};
+cachedModules[8787]={exports:{}};
 (function(module,exports) {'use strict';
 
 /**
@@ -27,8 +27,8 @@ var me = {
 		return me.exists(path) && fs.lstatSync(path).isDirectory();
 	}
 };
-module.exports = me;}).call(this,cachedModules[4610],cachedModules[4610].exports);
-cachedModules[3507]={exports:{}};
+module.exports = me;}).call(this,cachedModules[8787],cachedModules[8787].exports);
+cachedModules[7124]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -86,8 +86,8 @@ module.exports = {
 		}
 		return true;
 	}
-};}).call(this,cachedModules[3507],cachedModules[3507].exports);
-cachedModules[3737]={exports:{}};
+};}).call(this,cachedModules[7124],cachedModules[7124].exports);
+cachedModules[3143]={exports:{}};
 (function(module,exports) {'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -96,7 +96,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * Created by roger on 29/05/16.
  */
 
-var utils = cachedModules[3507].exports;
+var utils = cachedModules[7124].exports;
 var path = require('path');
 
 var demoExtension = {
@@ -261,15 +261,15 @@ var me = {
 		throw Error('Extension "' + extensionName + '" not found.');
 	}
 };
-module.exports = me;}).call(this,cachedModules[3737],cachedModules[3737].exports);'use strict';
+module.exports = me;}).call(this,cachedModules[3143],cachedModules[3143].exports);'use strict';
 
 /**
  * Created by roger on 29/05/16.
  */
 
-var file = cachedModules[4610].exports;
-var utils = cachedModules[3507].exports;
-var core = cachedModules[3737].exports;
+var file = cachedModules[8787].exports;
+var utils = cachedModules[7124].exports;
+var core = cachedModules[3143].exports;
 
 module.exports = function () {
 	var extensionFolder = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
@@ -313,7 +313,11 @@ module.exports = function () {
 			throw new Error('Method "extendApp" requires first argument to be a Loopback App.');
 		}
 
-		app.models.forEach(function (Model) {
+		for (var i in app.models) {
+			if (!app.models.hasOwnProperty(i)) {
+				return;
+			}
+			var Model = app.models[i];
 
 			if (!app || !utils.isLoopbackModel(Model)) {
 				throw new Error('Found a model that isn\'t a Loopback Model.');
@@ -321,6 +325,6 @@ module.exports = function () {
 
 			var extensions = Model.settings.extends || [];
 			extend(Model, extensions);
-		});
+		}
 	}
 };
