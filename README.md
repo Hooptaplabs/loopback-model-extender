@@ -1,3 +1,8 @@
+
+**DEPRECATED**: We are not so smarts. Loopback comes with **mixins**, and they have exactly our functionality. We didn't know that this exists, and we *reinvented the wheel*. On the positive side, this helped us to learn how to make a library for loopback and to learn to do tests. *Lol*.
+
+
+
 Loopback Model Extender
 =========
 [![GitHub version][fury-badge]][fury-url]
